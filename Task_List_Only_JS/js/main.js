@@ -22,7 +22,31 @@ function criaBotaoApagar(li) {
   const botaoApagar = document.createElement("button");
   botaoApagar.innerText = "Apagar";
   botaoApagar.setAttribute("class", "apagar");
+  botaoApagar.setAttribute("title", "Delete Task");
   li.appendChild(botaoApagar);
+}
+
+function salvarTarefas() {
+  const liTarefas = tarefas.querySelectorAll("li");
+  const listaDeTarefas = [];
+
+  for (let tarefa of liTarefas) {
+    let tarefaTexto = tarefa.innerText;
+    tarefaTexto = tarefaTexto.replace("Apagar", "").trim();
+    listaDeTarefas.push(tarefaTexto);
+  }
+
+  const tarefasJSON = JSON.stringify(listaDeTarefas);
+  localStorage.setItem("tarefas", tarefasJSON);
+}
+
+function adicionaTarefasSalvas() {
+  const tarefas = localStorage.getItem("tarefas");
+  const listaDeTarefas = JSON.parse(tarefas);
+
+  for (let tarefa of listaDeTarefas) {
+    criaTarefa(tarefa);
+  }
 }
 
 function criaTarefa(textoInput) {
@@ -31,6 +55,7 @@ function criaTarefa(textoInput) {
   tarefas.appendChild(li);
   limpaInput();
   criaBotaoApagar(li);
+  salvarTarefas();
 }
 
 inputTarefa.addEventListener("keypress", function (event) {
@@ -42,3 +67,13 @@ inputTarefa.addEventListener("keypress", function (event) {
 btnTarefa.addEventListener("click", function (event) {
   verificaTextoNoInput();
 });
+
+document.addEventListener("click", function (event) {
+  const element = event.target;
+  if (element.classList.contains("apagar")) {
+    element.parentElement.remove();
+    salvarTarefas();
+  }
+});
+
+adicionaTarefasSalvas();
