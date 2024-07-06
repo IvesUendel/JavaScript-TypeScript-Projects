@@ -54,3 +54,22 @@ function initMap() {
     { name: "São Borja", lat: -28.6602, lng: -56.0045 },
     { name: "Alegrete", lat: -29.7842, lng: -55.7984 },
   ];
+
+  // Adicionando marcadores para cada cidade
+  cities.forEach(function (city) {
+    let marker = new google.maps.Marker({
+      position: { lat: city.lat, lng: city.lng },
+      map: map,
+      title: city.name,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 20,
+        fillColor: "red",
+        fillOpacity: 0.5,
+        strokeColor: "red",
+        stroleOpacity: 0.2,
+        strokeWeight: 2,
+      },
+    });
+  });
+}
