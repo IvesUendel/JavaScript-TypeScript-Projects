@@ -58,3 +58,22 @@ form button {
 form button:hover {
   background: var(--primary-color-darker);
 }
+
+.password-generate {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  margin: 40px 0;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.generate-password {
+  margin-top: 20px;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: bold;
+}

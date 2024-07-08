@@ -2,6 +2,77 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/modules/formGeneratePassword.js":
+/*!*********************************************!*\
+  !*** ./src/modules/formGeneratePassword.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _generators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./generators */ "./src/modules/generators.js");
+
+var passwordGenerate = document.querySelector(".password-generate");
+var qtdCaracters = document.querySelector(".qtd-caracters");
+var chkUppercase = document.querySelector(".chk-uppercase");
+var chkLowercase = document.querySelector(".chk-lowercase");
+var chkNumbers = document.querySelector(".chk-numbers");
+var chkSymbols = document.querySelector(".chk-symbols");
+var buttonGeneratePassword = document.querySelector(".generate-password");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
+  buttonGeneratePassword.addEventListener("click", function () {
+    passwordGenerate.innerHTML = generator();
+  });
+});
+function generator() {
+  var password = (0,_generators__WEBPACK_IMPORTED_MODULE_0__["default"])(qtdCaracters.value, chkUppercase.checked, chkLowercase.checked, chkNumbers.checked, chkSymbols.checked);
+  return password || "No options selected";
+}
+
+/***/ }),
+
+/***/ "./src/modules/generators.js":
+/*!***********************************!*\
+  !*** ./src/modules/generators.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ generatePassword)
+/* harmony export */ });
+var rand = function rand(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+};
+var generateUppercaseLetter = function generateUppercaseLetter() {
+  return String.fromCharCode(rand(65, 91));
+};
+var generateLowercaseLetter = function generateLowercaseLetter() {
+  return String.fromCharCode(rand(97, 123));
+};
+var generateNumbers = function generateNumbers() {
+  return String.fromCharCode(rand(48, 58));
+};
+var symbols = "@#%$&!.";
+var generateSymbol = function generateSymbol() {
+  return symbols[rand(0, symbols.length)];
+};
+function generatePassword(qtd, uppercaseLetter, lowercaseLetter, numbers, symbols) {
+  var passwordArray = [];
+  qtd = Number(qtd);
+  for (var i = 0; i < qtd; i++) {
+    uppercaseLetter && passwordArray.push(generateUppercaseLetter());
+    lowercaseLetter && passwordArray.push(generateLowercaseLetter());
+    numbers && passwordArray.push(generateNumbers());
+    symbols && passwordArray.push(generateSymbol());
+  }
+  return passwordArray.join("").slice(0, qtd);
+}
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/assets/css/style.css":
 /*!************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/assets/css/style.css ***!
@@ -81,7 +152,26 @@ form button {
 form button:hover {
   background: var(--primary-color-darker);
 }
-`, "",{"version":3,"sources":["webpack://./src/assets/css/style.css"],"names":[],"mappings":"AACA;EACE,iCAAiC;EACjC,sCAAsC;AACxC;;AAEA;EACE,sBAAsB;EACtB,UAAU;AACZ;;AAEA;EACE,SAAS;EACT,UAAU;EACV,gCAAgC;EAChC,oCAAoC;EACpC,gBAAgB;EAChB,kBAAkB;AACpB;;AAEA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,gBAAgB;EAChB,aAAa;EACb,mBAAmB;AACrB;;AAEA;;;EAGE,cAAc;EACd,WAAW;EACX,mBAAmB;AACrB;;AAEA;EACE,eAAe;EACf,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE,uCAAuC;AACzC;;AAEA;EACE,YAAY;EACZ,gCAAgC;EAChC,WAAW;EACX,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,eAAe;EACf,gBAAgB;AAClB;;AAEA;EACE,uCAAuC;AACzC","sourcesContent":["@import url(\"https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap\");\r\n:root {\r\n  --primary-color: rgb(17, 86, 102);\r\n  --primary-color-darker: rgb(9, 48, 56);\r\n}\r\n\r\n* {\r\n  box-sizing: border-box;\r\n  outline: 0;\r\n}\r\n\r\nbody {\r\n  margin: 0;\r\n  padding: 0;\r\n  background: var(--primary-color);\r\n  font-family: \"Open sans\", sans-serif;\r\n  font-size: 1.3em;\r\n  line-height: 1.5em;\r\n}\r\n\r\n.container {\r\n  max-width: 640px;\r\n  margin: 50px auto;\r\n  background: #fff;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\nform input,\r\nform label,\r\nform button {\r\n  display: block;\r\n  width: 100%;\r\n  margin-bottom: 10px;\r\n}\r\n\r\nform input {\r\n  font-size: 24px;\r\n  height: 50px;\r\n  padding: 0 20px;\r\n}\r\n\r\nform input:focus {\r\n  outline: 1px solid var(--primary-color);\r\n}\r\n\r\nform button {\r\n  border: none;\r\n  background: var(--primary-color);\r\n  color: #fff;\r\n  font-size: 18px;\r\n  font-weight: 700;\r\n  height: 50px;\r\n  cursor: pointer;\r\n  margin-top: 30px;\r\n}\r\n\r\nform button:hover {\r\n  background: var(--primary-color-darker);\r\n}\r\n"],"sourceRoot":""}]);
+
+.password-generate {
+  font-size: 1.5em;
+  color: var(--primary-color);
+  margin: 40px 0;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.generate-password {
+  margin-top: 20px;
+  font-size: 20px;
+  padding: 10px;
+  font-weight: bold;
+}
+`, "",{"version":3,"sources":["webpack://./src/assets/css/style.css"],"names":[],"mappings":"AACA;EACE,iCAAiC;EACjC,sCAAsC;AACxC;;AAEA;EACE,sBAAsB;EACtB,UAAU;AACZ;;AAEA;EACE,SAAS;EACT,UAAU;EACV,gCAAgC;EAChC,oCAAoC;EACpC,gBAAgB;EAChB,kBAAkB;AACpB;;AAEA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,gBAAgB;EAChB,aAAa;EACb,mBAAmB;AACrB;;AAEA;;;EAGE,cAAc;EACd,WAAW;EACX,mBAAmB;AACrB;;AAEA;EACE,eAAe;EACf,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE,uCAAuC;AACzC;;AAEA;EACE,YAAY;EACZ,gCAAgC;EAChC,WAAW;EACX,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,eAAe;EACf,gBAAgB;AAClB;;AAEA;EACE,uCAAuC;AACzC;;AAEA;EACE,gBAAgB;EAChB,2BAA2B;EAC3B,cAAc;AAChB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,gBAAgB;AAClB;;AAEA;EACE,gBAAgB;EAChB,eAAe;EACf,aAAa;EACb,iBAAiB;AACnB","sourcesContent":["@import url(\"https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap\");\r\n:root {\r\n  --primary-color: rgb(17, 86, 102);\r\n  --primary-color-darker: rgb(9, 48, 56);\r\n}\r\n\r\n* {\r\n  box-sizing: border-box;\r\n  outline: 0;\r\n}\r\n\r\nbody {\r\n  margin: 0;\r\n  padding: 0;\r\n  background: var(--primary-color);\r\n  font-family: \"Open sans\", sans-serif;\r\n  font-size: 1.3em;\r\n  line-height: 1.5em;\r\n}\r\n\r\n.container {\r\n  max-width: 640px;\r\n  margin: 50px auto;\r\n  background: #fff;\r\n  padding: 20px;\r\n  border-radius: 10px;\r\n}\r\n\r\nform input,\r\nform label,\r\nform button {\r\n  display: block;\r\n  width: 100%;\r\n  margin-bottom: 10px;\r\n}\r\n\r\nform input {\r\n  font-size: 24px;\r\n  height: 50px;\r\n  padding: 0 20px;\r\n}\r\n\r\nform input:focus {\r\n  outline: 1px solid var(--primary-color);\r\n}\r\n\r\nform button {\r\n  border: none;\r\n  background: var(--primary-color);\r\n  color: #fff;\r\n  font-size: 18px;\r\n  font-weight: 700;\r\n  height: 50px;\r\n  cursor: pointer;\r\n  margin-top: 30px;\r\n}\r\n\r\nform button:hover {\r\n  background: var(--primary-color-darker);\r\n}\r\n\r\n.password-generate {\r\n  font-size: 1.5em;\r\n  color: var(--primary-color);\r\n  margin: 40px 0;\r\n}\r\n\r\ninput[type=\"checkbox\"] {\r\n  width: 20px;\r\n  height: 20px;\r\n  margin-top: 10px;\r\n}\r\n\r\n.generate-password {\r\n  margin-top: 20px;\r\n  font-size: 20px;\r\n  padding: 10px;\r\n  font-weight: bold;\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -605,7 +695,10 @@ var __webpack_exports__ = {};
   \*********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/style.css */ "./src/assets/css/style.css");
+/* harmony import */ var _modules_formGeneratePassword__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/formGeneratePassword */ "./src/modules/formGeneratePassword.js");
 
+
+(0,_modules_formGeneratePassword__WEBPACK_IMPORTED_MODULE_1__["default"])();
 /******/ })()
 ;
 //# sourceMappingURL=bundle.js.map
